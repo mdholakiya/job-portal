@@ -1,5 +1,5 @@
 import mongoose from "mongoose"
-
+// connect with mongodb 
 const connectDb= async()=>{
 try{
  const conn=await mongoose.connect(process.env.MONGO_URL)
@@ -7,7 +7,6 @@ try{
 
 }catch(error){
     console.log(`mongodb error ${error}`)
-
 }
 }
 

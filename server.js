@@ -1,17 +1,32 @@
+// npm pakages
 import express from "express";
 import dotenv from "dotenv";
-import connectDb from "./model/db.js";
+import cors from "cors";
+import morgan from "morgan"
+// files pakages
+import connectDb from "./config/db.js";
+import testRout from "./routs/testRout.js"
 
+// dot env config
  dotenv.config();
 
+//  mongodb connection
+ connectDb()
+
+// express object&port
 const app=express();
 const port =process.env.PORT;
 
-app.get("/",(req,res)=>{
-    res.send("hello");
-})
+// middle ware
+app.use(express.json())
+app.use(cors());
+app.use(morgan());
+
+// rout
+app.use("/",testRout)
+app.use("/login",testRout)
 
 app.listen(port,()=>{
-    connectDb()
+    
     console.log(`server is running on ${port}`)
 })
