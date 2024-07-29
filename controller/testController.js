@@ -1,3 +1,4 @@
+
 export const userController1=(req,res)=>{
     res.send ("hello")
 }

@@ -2,10 +2,11 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
-import morgan from "morgan"
+import morgan from "morgan";
 // files pakages
 import connectDb from "./config/db.js";
 import testRout from "./routs/testRout.js"
+import authRout from "./routs/authRout.js";
 
 // dot env config
  dotenv.config();
@@ -24,8 +25,8 @@ app.use(morgan());
 
 // rout
 app.use("/",testRout)
-app.use("/login",testRout)
-
+app.use("/user/test",testRout)
+app.use("/user/auth",authRout)
 app.listen(port,()=>{
     
     console.log(`server is running on ${port}`)
