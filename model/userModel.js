@@ -19,7 +19,8 @@ const userSchema= new mongoose.Schema({
     },
     password:{
         type:String,
-        required:[true,"passwoed is require"]
+        required:[true,"passwoed is require"],
+        minlength:[6,"min 6 char require"]
     },
     location:{
         type:String,

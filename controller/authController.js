@@ -1,38 +1,27 @@
 import userModel from "../model/userModel.js";
 
-export const registerController = async (req, res) => {
+export const registerController = async (err,req, res,next) => {
     try {
         const { name, middleName, email, password } = req.body
         if (!name) {
-            res.status(400).send({
-                message: "name is require", success: false
-            });
-        }
+            next("name is require");
+            }
+
         if (!middleName) {
-            res.status(400).send({
-                message: "middle-name is require", success: false
-            });
+            next("middleName is require");
         }
         if (!email) {
-            res.status(400).send({
-                message: "email is require", success: false
-            });
+            next("email is require");
         }
         if (!password) {
-            res.status(400).send({
-                message: "password is require", success: false,
-                minLength:[6,"password lejgth should bw grater than 6"]
-            });
+            next("password is require");
         }
         const existingUser = await userModel.findOne({ email })
         if (existingUser) {
-            return res.status(200).send({
-                success: fail,
-                message: "email already exist add another email"
-            })
+           next("email is already exist please try to login")
         }
         const user = await userModel.create({ name, middleName, email, password })
-        res.status(200).json({
+        res.status(200).send({
             message: "user created",
             success: true,
             user
@@ -40,12 +29,8 @@ export const registerController = async (req, res) => {
 
     } catch (error) {
         console.log(error)
-        res.status(400).json({
-            message: "error in registration form",
-            success: false,
-            error
-        })
-    }
+            next(error);
+        }
 
 
 }
