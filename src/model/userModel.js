@@ -1,5 +1,5 @@
 import mongoose from "mongoose"
-import validator from "validator"
+// import validator from "validator"
 // create schema 
 const userSchema= new mongoose.Schema({
     name:{
@@ -15,7 +15,6 @@ const userSchema= new mongoose.Schema({
         type:String,
         required:[true,"email is require"],
         unique:true,
-        validate:validator.isEmail,
     },
     password:{
         type:String,
@@ -29,4 +28,5 @@ const userSchema= new mongoose.Schema({
     },
    {timestamps:true}
 );
-export default mongoose.model("User",userSchema);
+const userModel=mongoose.model("User",userSchema);
+export default userModel 
